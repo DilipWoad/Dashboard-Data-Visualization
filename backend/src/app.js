@@ -13,7 +13,9 @@ app.use(express.urlencoded({limit:"20kb",extended:true}));
 //
 
 //Handling routing 
+import dataRouter from "./routes/data.route.js"
 
+app.use('/api/v1/data',dataRouter)
 //
 
 //Handing Global Error handler
