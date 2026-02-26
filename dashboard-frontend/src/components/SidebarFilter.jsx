@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DateRangeSlider from "../utils/DateRangeSlider";
 import Select from "react-select";
+import MultipleCheckBox from "../utils/MultipleCheckBox";
 
-const SidebarFilter = () => {
+const SidebarFilter = ({ onFilterChange }) => {
   const [dateRange, setDateRange] = useState({ min: "2016", max: "2050" });
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+  const [showFilter, setShowFilter] = useState(false);
+
+  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState([]);
+  const [selectedSector, setSelectedSector] = useState([]);
+  const [selectedTopic, setSelectedTopic] = useState([]);
 
   const regions = [
     { value: "Northern America", label: "Northern America" },
@@ -34,45 +36,110 @@ const SidebarFilter = () => {
     { value: "World", label: "World" },
   ];
 
-  const countries = [
+  const allCountries = [
     {
       value: "United States of America",
       label: "United States of America",
+      region: "Northern America",
     },
-    { value: "Canada", label: "Canada" },
-    { value: "Mexico", label: "Mexico" },
-    { value: "Brazil", label: "Brazil" },
-    { value: "Colombia", label: "Colombia" },
-    { value: "Argentina", label: "Argentina" },
-    { value: "Venezuela", label: "Venezuela" },
-    { value: "Russia", label: "Russia" },
-    { value: "Ukraine", label: "Ukraine" },
-    { value: "United Kingdom", label: "United Kingdom" },
-    { value: "Germany", label: "Germany" },
-    { value: "Estonia", label: "Estonia" },
-    { value: "Austria", label: "Austria" },
-    { value: "Spain", label: "Spain" },
-    { value: "Hungary", label: "Hungary" },
-    { value: "Saudi Arabia", label: "Saudi Arabia" },
-    { value: "Lebanon", label: "Lebanon" },
-    { value: "India", label: "India" },
-    { value: "Azerbaijan", label: "Azerbaijan" },
-    { value: "Indonesia", label: "Indonesia" },
-    { value: "Iraq", label: "Iraq" },
-    { value: "Iran", label: "Iran" },
-    { value: "China", label: "China" },
-    { value: "Japan", label: "Japan" },
-    { value: "Kuwait", label: "Kuwait" },
-    { value: "Nigeria", label: "Nigeria" },
-    { value: "Angola", label: "Angola" },
-    { value: "Egypt", label: "Egypt" },
-    { value: "South Africa", label: "South Africa" },
-    { value: "Mali, Niger", label: "Mali, Niger" },
-    { value: "Libya", label: "Libya" },
-    { value: "Burkina Faso", label: "Burkina Faso" },
-    { value: "South Sudan", label: "South Sudan" },
-    { value: "Morocco", label: "Morocco" },
-    { value: "Australia", label: "Australia" },
+    { value: "Canada", label: "Canada", region: "Northern America" },
+    { value: "Mexico", label: "Mexico", region: "Central America" },
+    { value: "Brazil", label: "Brazil", region: "South America" },
+    { value: "Colombia", label: "Colombia", region: "South America" },
+    { value: "Argentina", label: "Argentina", region: "South America" },
+    { value: "Venezuela", label: "Venezuela", region: "South America" },
+
+    { value: "Russia", label: "Russia", region: "Europe" || "Eastern Europe" },
+    {
+      value: "Ukraine",
+      label: "Ukraine",
+      region: "Europe" || "Eastern Europe",
+    },
+    {
+      value: "United Kingdom",
+      label: "United Kingdom",
+      region: "Europe" || "Northern Europe",
+    },
+    {
+      value: "Germany",
+      label: "Germany",
+      region: "Europe" || "Western Europe",
+    },
+    {
+      value: "Estonia",
+      label: "Estonia",
+      region: "Europe" || "Eastern Europe",
+    },
+    {
+      value: "Austria",
+      label: "Austria",
+      region: "Europe" || "Western Europe",
+    },
+    { value: "Spain", label: "Spain", region: "Europe" || "Southern Europe" },
+    {
+      value: "Hungary",
+      label: "Hungary",
+      region: "Europe" || "Eastern Europe",
+    },
+
+    {
+      value: "Saudi Arabia",
+      label: "Saudi Arabia",
+      region: "Asia" || "Western Asia",
+    },
+    { value: "Lebanon", label: "Lebanon", region: "Asia" || "Western Asia" },
+    { value: "India", label: "India", region: "Asia" || "Southern Asia" },
+    {
+      value: "Azerbaijan",
+      label: "Azerbaijan",
+      region: "Asia" || "Western Asia",
+    },
+    {
+      value: "Indonesia",
+      label: "Indonesia",
+      region: "Asia" || "South-Eastern Asia",
+    },
+    { value: "Iraq", label: "Iraq", region: "Asia" || "Western Asia" },
+    { value: "Iran", label: "Iran", region: "Asia" || "Western Asia" },
+    { value: "China", label: "China", region: "Asia" || "Eastern Asia" },
+    { value: "Japan", label: "Japan", region: "Asia" || "Eastern Asia" },
+    { value: "Kuwait", label: "Kuwait", region: "Asia" || "Western Asia" },
+
+    {
+      value: "Nigeria",
+      label: "Nigeria",
+      region: "Africa" || "Western Africa",
+    },
+    { value: "Angola", label: "Angola", region: "Africa" || "Central Africa" },
+    { value: "Egypt", label: "Egypt", region: "Africa" || "Northern Africa" },
+    {
+      value: "South Africa",
+      label: "South Africa",
+      region: "Africa" || "Southern Africa",
+    },
+    {
+      value: "Mali, Niger",
+      label: "Mali, Niger",
+      region: "Africa" || "Western Africa",
+    },
+    { value: "Libya", label: "Libya", region: "Africa" || "Northern Africa" },
+    {
+      value: "Burkina Faso",
+      label: "Burkina Faso",
+      region: "Africa" || "Western Africa",
+    },
+    {
+      value: "South Sudan",
+      label: "South Sudan",
+      region: "Africa" || "Central Africa",
+    },
+    {
+      value: "Morocco",
+      label: "Morocco",
+      region: "Africa" || "Northern Africa",
+    },
+
+    { value: "Australia", label: "Australia", region: "Oceania" },
   ];
 
   const sectors = [
@@ -150,42 +217,158 @@ const SidebarFilter = () => {
     { value: "tension", label: "tension" },
     { value: "terrorism", label: "terrorism" },
   ];
+
+  const pestleList = [
+    "Industries",
+    "Environmental",
+    "Economic",
+    "Political",
+    "Technological",
+    "Organization",
+    "Healthcare",
+    "Social",
+    "Lifestyles",
+  ];
+
+  //if selectedRegion not world then show filter out by regions , if world , show all
+  const availableCountries =
+    selectedRegion && selectedRegion.value !== "World"
+      ? allCountries.filter(
+          (country) => country.region === selectedRegion.value,
+        )
+      : allCountries;
+
   const handleDateChange = (range) => {
     setDateRange(range);
   };
 
+  const handleRegionChange = (choice) => {
+    setSelectedRegion(choice);
+
+    setSelectedCountry([]); //for new set of countries
+  };
+
+  const handleCountryChange = (choices) => {
+    setSelectedCountry(choices);
+  };
+
+  const handleSectorChange = (choices) => {
+    setSelectedSector(choices);
+  };
+
+  const handleTopicChange = (choices) => {
+    setSelectedTopic(choices);
+  };
+
+  const handleResetFilters = () => {
+    setDateRange({ min: 2016, max: 2050 });
+    setSelectedRegion(null);
+    setSelectedCountry([]);
+    setSelectedSector(null);
+    setSelectedTopic(null);
+  };
+
+  useEffect(() => {
+    if (onFilterChange) {
+      // Package all the current filter states into one object
+      const currentFilters = {
+        dateRange: dateRange,
+        region: selectedRegion ? selectedRegion.value : null,
+        // react-select multi returns an array of objects, we map it to just the strings
+        countries: selectedCountry ? selectedCountry.map((c) => c.value) : [],
+        // Assuming you add state for these later:
+        sectors: selectedSector.map((s) => s.value),
+        topics: selectedTopic.map((t) => t.value),
+      };
+
+      // Send it to the parent
+      onFilterChange(currentFilters);
+    }
+  }, [dateRange, selectedRegion, selectedCountry]);
+
   return (
-    <div className="bg-red-600 w-50 px-2">
-      <p>Filters</p>
-      <div className="flex flex-col">
-        <div className="bg-purple-400">
-          <DateRangeSlider
-            minYear={2016}
-            maxYear={2050}
-            onChange={handleDateChange}
-          />
-          <div className=" text-white">
-            Current Selected Range: {dateRange.min} - {dateRange.max}
+    <div className="bg-red-600 w-64 p-2 overflow-y-scroll">
+      <div className="bg-cyan-300 flex justify-between p-2 z-20">
+        <p>Filters</p>{" "}
+        <button
+          onClick={() => setShowFilter(!showFilter)}
+          className="cursor-pointer"
+        >
+          <span
+            className={`transition-transform inline-block duration-300 ${showFilter ? "rotate-180" : "rotate-0"}`}
+          >
+            ▼
+          </span>
+        </button>
+      </div>
+      {
+        <div
+          className={` transition-all duration-500 ease-in-out overflow-hidden ${showFilter ? "opacity-100" : "max-h-0 opacity-0"}`}
+        >
+          <div className="flex flex-col mt-2">
+            <div className="bg-purple-400">
+              <DateRangeSlider
+                minYear={2016}
+                maxYear={2050}
+                onChange={handleDateChange}
+              />
+              <div className=" text-white">
+                Current Selected Range: {dateRange.min} - {dateRange.max}
+              </div>
+            </div>
           </div>
+          <div>
+            <label>Region</label>
+            <Select
+              options={regions}
+              value={selectedRegion}
+              onChange={handleRegionChange}
+            />
+          </div>
+          <div>
+            <label>Country</label>
+            <Select
+              options={availableCountries}
+              value={selectedCountry}
+              onChange={handleCountryChange}
+              isMulti
+              isSearchable
+            />
+          </div>
+          <div>
+            <label>Sector</label>
+            <Select
+              options={sectors}
+              value={selectedSector}
+              onChange={handleSectorChange}
+              isMulti
+              isSearchable
+            />
+          </div>
+          <div className="">
+            <label>Topic</label>
+            <Select
+              className=""
+              options={topics}
+              value={selectedTopic}
+              onChange={handleTopicChange}
+              isMulti
+              isSearchable
+            />
+          </div>
+          <div>
+            <label>Pestle</label>
+            <MultipleCheckBox items={pestleList} />
+          </div>
+
+          <button
+            onClick={handleResetFilters}
+            className="w-full mt-4 bg-slate-700 hover:bg-slate-600 text-white py-2 rounded transition-colors"
+          >
+            Reset All Filters
+          </button>
         </div>
-      </div>
-      <div>
-        <label>Region</label>
-        <Select options={regions} />
-      </div>
-      <div>
-        <label>Country</label>
-        <Select options={countries} isMulti isSearchable />
-      </div>
-      <div>
-        <label>Sector</label>
-        <Select options={sectors} isMulti isSearchable />
-      </div>
-      <div className="">
-        <label>Topic</label>
-        <Select className="" options={topics} isMulti isSearchable />
-      </div>
-      <div>Pestle</div>
+      }
     </div>
   );
 };
