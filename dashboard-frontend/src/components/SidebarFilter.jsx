@@ -12,6 +12,8 @@ const SidebarFilter = ({ onFilterChange }) => {
   const [selectedSector, setSelectedSector] = useState([]);
   const [selectedTopic, setSelectedTopic] = useState([]);
 
+  const [selectedPestle,setSelectedPestle] = useState([]);
+
   const regions = [
     { value: "Northern America", label: "Northern America" },
     { value: "Central America", label: "Central America" },
@@ -358,7 +360,7 @@ const SidebarFilter = ({ onFilterChange }) => {
           </div>
           <div>
             <label>Pestle</label>
-            <MultipleCheckBox items={pestleList} />
+            <MultipleCheckBox items={pestleList} selectedPestle={selectedPestle} setSelectedPestle={setSelectedPestle}  />
           </div>
 
           <button

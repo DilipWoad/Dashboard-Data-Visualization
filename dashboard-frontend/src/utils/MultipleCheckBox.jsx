@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const MultipleCheckBox = ({items}) => {
+const MultipleCheckBox = ({items,selectedPestle,setSelectedPestle}) => {
   //what we can do is we will get array of just the industries =[eco,external,etc]
   //we convert it to [{name:eco,isChecked:false}];
   const updatedItems = items.map((item) => ({ name: item, isChecked: false }));
@@ -13,6 +13,9 @@ const MultipleCheckBox = ({items}) => {
     //oh we can give index to each
     const updateCheckbox = [...pestle];
     updateCheckbox[index].isChecked = !updateCheckbox[index].isChecked;
+    const filterPestle = updateCheckbox.filter(item => item.isChecked === true);
+    console.log("SelectedPestle :: ",filterPestle);
+    setSelectedPestle(filterPestle);
     setPestle(updateCheckbox);
   };
   return (
