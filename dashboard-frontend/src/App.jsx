@@ -1,10 +1,10 @@
+import Body from "./components/Body";
+
 function App() {
   return (
-    <>
-      <h1 className="bg-gray-700 text-white text-4xl font-extrabold w-screen h-screen text-center">
-        Hello World
-      </h1>
-    </>
+    <div className="w-screen h-screen">
+      <Body/>
+    </div>
   );
 }
 
