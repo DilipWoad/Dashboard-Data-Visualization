@@ -90,7 +90,7 @@ const SidebarFilter = ({ onFilterChange }) => {
       region: "Asia" || "Western Asia",
     },
     { value: "Lebanon", label: "Lebanon", region: "Asia" || "Western Asia" },
-    { value: "India", label: "India", region: "Asia" || "Southern Asia" },
+    { value: "India", label: "India", region: "Southern Asia" },
     {
       value: "Azerbaijan",
       label: "Azerbaijan",
@@ -262,32 +262,47 @@ const SidebarFilter = ({ onFilterChange }) => {
     setSelectedTopic(choices);
   };
 
+  const makeCheckboxFalse=(pestle)=>{
+    pestle.length>=1 && pestle.forEach(item => item.isChecked=false);
+    setSelectedPestle([]);
+  }
+
   const handleResetFilters = () => {
     setDateRange({ min: 2016, max: 2050 });
     setSelectedRegion(null);
     setSelectedCountry([]);
-    setSelectedSector(null);
-    setSelectedTopic(null);
+    setSelectedSector([]);
+    setSelectedTopic([]);
     setSelectedPestle([]);
+    //make checkbox as false
+    makeCheckboxFalse(selectedPestle);
   };
 
   useEffect(() => {
     if (onFilterChange) {
       // Package all the current filter states into one object
+      console.log("Pestle :: ",selectedPestle)
       const currentFilters = {
-        dateRange: dateRange,
+        // end_year: dateRange.max,
         region: selectedRegion ? selectedRegion.value : null,
         // react-select multi returns an array of objects, we map it to just the strings
-        countries: selectedCountry ? selectedCountry.map((c) => c.value) : [],
+        country: selectedCountry ? selectedCountry.map((c) => c.value) : null,
         // Assuming you add state for these later:
-        sectors: selectedSector.map((s) => s.value),
-        topics: selectedTopic.map((t) => t.value),
+        sector:selectedSector? selectedSector?.map((s) => s.value):null,
+        topic:selectedTopic? selectedTopic?.map((t) => t.value):null,
+        pestle:selectedPestle? selectedPestle?.map((p)=>p.name):null,
       };
-
       // Send it to the parent
       onFilterChange(currentFilters);
     }
-  }, [dateRange, selectedRegion, selectedCountry]);
+  }, [
+    dateRange,
+    selectedRegion,
+    selectedCountry,
+    selectedSector,
+    selectedTopic,
+    selectedPestle,
+  ]);
 
   return (
     <div className="bg-red-600 w-64 p-2 overflow-y-scroll">

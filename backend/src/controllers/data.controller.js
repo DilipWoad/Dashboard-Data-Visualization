@@ -5,16 +5,24 @@ import asyncRequestHandler from "../utils/asyncReqestHandler.js";
 const queryFilters = (query) => {
   const filter = {};
 
-  const { end_year, topic, sector, region, pestle, source, country } = query;
+  const { end_year, topic, sector, region, pestle, country } = query;
+
+  console.log("--------------------The Query :: ",query)
+  const countryArray = country.split(",");
+  const topicArray = topic.split(",");
+  const sectorArray = sector.split(",");
+  const pestleArray = pestle.split(",");
 
   if (end_year) filter.end_year = end_year;
 
-  if (topic) filter.topic = { $regex: topic, $options: "i" };
-  if (sector) filter.sector = { $regex: sector, $options: "i" };
-  if (region) filter.region = { $regex: region, $options: "i" };
-  if (pestle) filter.pestle = { $regex: pestle, $options: "i" };
+  if (topic) filter.topic = { $in: topicArray};
+  if (sector) filter.sector = { $in: sectorArray};
+  if (region) filter.region = region
+  if (pestle) filter.pestle = { $in: pestleArray };
 //   if (source) filter.source = { $regex: source, $options: "i" };
-  if (country) filter.country = { $regex: country, $options: "i" };
+  if (country) filter.country = { $in: countryArray};
+
+  console.log("-------------------The filter :: ",filter)
 
   return filter;
 };
@@ -59,7 +67,7 @@ const getFilterOptions = asyncRequestHandler(async (req, res) => {
     regions: regions.filter((item) => item),
     pestles: pestles.filter((item) => item),
     countries: countries.filter((item) => item),
-    sources: sources.filter((item) => item),
+    // sources: sources.filter((item) => item),
   };
 
   return res
