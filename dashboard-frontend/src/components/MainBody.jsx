@@ -1,7 +1,14 @@
-const MainBody = () => {
-  return (
-    <div className='bg-lime-500 flex-1 overflow-y-auto'>MainBody</div>
-  )
-}
+import InsightFeed from "./InsightFeed";
 
-export default MainBody
+const MainBody = ({ insightFeed }) => {
+  return (
+    <div className="flex flex-col flex-1 overflow-y-auto gap-2">
+      <div className="bg-slate-800 flex-1 text-white rounded-lg">Dashboard charts</div>
+      <div className="">
+        <InsightFeed feedData={insightFeed} />
+      </div>
+    </div>
+  );
+};
+
+export default MainBody;

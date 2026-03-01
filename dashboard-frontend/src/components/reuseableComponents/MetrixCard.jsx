@@ -1,9 +1,9 @@
-const MetrixCard = () => {
+const MetrixCard = ({title,value}) => {
   return (
-    <div className="bg-sky-400 p-2 flex flex-1">
-      <div className="flex flex-col bg-pink-300 items-center w-full">
-        <p className="">Title</p>
-        <p>value</p>
+    <div className="bg-slate-800 text-white p-1 flex flex-1 rounded-lg">
+      <div className="flex flex-col  items-center w-full">
+        <p className="font-semibold">{title}</p>
+        <p>{value}</p>
       </div>
     </div>
   );

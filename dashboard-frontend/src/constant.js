@@ -108,3 +108,15 @@ const country =[
   },
   { value: 'Venezuela', label: 'Venezuela', region: '' }
 ]
+
+
+export function formatToDDMMYYYY(dateString) {
+  const date = new Date(dateString);
+  
+  // Extract parts and pad with leading zeros if necessary
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed in JS
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+}

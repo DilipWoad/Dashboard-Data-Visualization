@@ -1,14 +1,16 @@
-import MetrixCard from "./reuseableComponents/MetrixCard"
+import MetrixCard from "./reuseableComponents/MetrixCard";
 
-const HeaderMetrix = () => {
+const HeaderMetrix = ({ dataMetric }) => {
+  // const { avg_intensity, avg_likelihood, avg_relevance, total_records } = dataMetric;
+  if(!dataMetric) return <p>Loading..</p>
   return (
-    <div className='bg-yellow-300 p-2 flex justify-between gap-2 overflow-auto '>
-        <MetrixCard/>
-        <MetrixCard/>
-        <MetrixCard/>
-        <MetrixCard/>
+    <div className="flex justify-between gap-2 overflow-auto ">
+      <MetrixCard title={"Total insight"} value={dataMetric.total_records}/>
+      <MetrixCard title={"Avg. Intensity"} value={dataMetric.avg_intensity}/>
+      <MetrixCard title={"Avg. Likelihood"} value={dataMetric.avg_likelihood}/>
+      <MetrixCard title={"Avg. Relevance"} value={dataMetric.avg_relevance}/>
     </div>
-  )
-}
+  );
+};
 
-export default HeaderMetrix
+export default HeaderMetrix;

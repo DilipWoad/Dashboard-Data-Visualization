@@ -22,7 +22,7 @@ const MultipleCheckBox = ({items,selectedPestle,setSelectedPestle}) => {
     <ul>
       {pestle.map((item, index) => {
         return (
-          <li className="flex" key={item.name}>
+          <li className="flex gap-2 px-3 py-0.5" key={item.name}>
             <input
               type="checkbox"
               checked={item.isChecked}

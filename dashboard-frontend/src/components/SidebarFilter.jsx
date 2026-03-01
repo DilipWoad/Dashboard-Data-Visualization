@@ -22,125 +22,114 @@ const SidebarFilter = ({ onFilterChange }) => {
     { value: "Northern Europe", label: "Northern Europe" },
     { value: "Southern Europe", label: "Southern Europe" },
     { value: "Eastern Europe", label: "Eastern Europe" },
-    { value: "Europe", label: "Europe" },
+    // { value: "Europe", label: "Europe" },
     { value: "Northern Africa", label: "Northern Africa" },
     { value: "Western Africa", label: "Western Africa" },
     { value: "Central Africa", label: "Central Africa" },
     { value: "Southern Africa", label: "Southern Africa" },
-    { value: "Africa", label: "Africa" },
+    { value: "Eastern Africa", label: "Eastern Africa" },
+    // { value: "Africa", label: "Africa" },
     { value: "Western Asia", label: "Western Asia" },
     { value: "Southern Asia", label: "Southern Asia" },
     { value: "Central Asia", label: "Central Asia" },
     { value: "Eastern Asia", label: "Eastern Asia" },
     { value: "South-Eastern Asia", label: "South-Eastern Asia" },
-    { value: "Asia", label: "Asia" },
+    // { value: "Asia", label: "Asia" },
     { value: "Oceania", label: "Oceania" },
     { value: "World", label: "World" },
   ];
 
   const allCountries = [
+    //America
     {
       value: "United States of America",
       label: "United States of America",
       region: "Northern America",
     },
     { value: "Canada", label: "Canada", region: "Northern America" },
+
     { value: "Mexico", label: "Mexico", region: "Central America" },
+    { value: "Belize", label: "Belize", region: "Central America" },
+
     { value: "Brazil", label: "Brazil", region: "South America" },
     { value: "Colombia", label: "Colombia", region: "South America" },
     { value: "Argentina", label: "Argentina", region: "South America" },
     { value: "Venezuela", label: "Venezuela", region: "South America" },
 
-    { value: "Russia", label: "Russia", region: "Europe" || "Eastern Europe" },
-    {
-      value: "Ukraine",
-      label: "Ukraine",
-      region: "Europe" || "Eastern Europe",
-    },
+    //Europe
     {
       value: "United Kingdom",
       label: "United Kingdom",
-      region: "Europe" || "Northern Europe",
+      region: "Northern Europe",
     },
+    { value: "Russia", label: "Russia", region: "Eastern Europe" },
     {
-      value: "Germany",
-      label: "Germany",
-      region: "Europe" || "Western Europe",
+      value: "Ukraine",
+      label: "Ukraine",
+      region: "Eastern Europe",
     },
     {
       value: "Estonia",
       label: "Estonia",
-      region: "Europe" || "Eastern Europe",
+      region: "Eastern Europe",
+    },
+    {
+      value: "Hungary",
+      label: "Hungary",
+      region: "Eastern Europe",
+    },
+    {
+      value: "Germany",
+      label: "Germany",
+      region: "Western Europe",
     },
     {
       value: "Austria",
       label: "Austria",
-      region: "Europe" || "Western Europe",
+      region: "Western Europe",
     },
-    { value: "Spain", label: "Spain", region: "Europe" || "Southern Europe" },
-    {
-      value: "Hungary",
-      label: "Hungary",
-      region: "Europe" || "Eastern Europe",
-    },
+    { value: "Spain", label: "Spain", region: "Southern Europe" },
 
+    //Asia
+    { value: "China", label: "China", region: "Eastern Asia" },
+    { value: "Japan", label: "Japan", region: "Eastern Asia" },
+    { value: "Iraq", label: "Iraq", region: "Western Asia" },
+    { value: "Iran", label: "Iran", region: "Western Asia" },
+    { value: "Kuwait", label: "Kuwait", region: "Western Asia" },
     {
       value: "Saudi Arabia",
       label: "Saudi Arabia",
-      region: "Asia" || "Western Asia",
+      region: "Western Asia",
     },
-    { value: "Lebanon", label: "Lebanon", region: "Asia" || "Western Asia" },
-    { value: "India", label: "India", region: "Southern Asia" },
     {
       value: "Azerbaijan",
       label: "Azerbaijan",
-      region: "Asia" || "Western Asia",
+      region: "Western Asia",
     },
+    { value: "Lebanon", label: "Lebanon", region: "Western Asia" },
+    { value: "India", label: "India", region: "Southern Asia" },
     {
       value: "Indonesia",
       label: "Indonesia",
-      region: "Asia" || "South-Eastern Asia",
-    },
-    { value: "Iraq", label: "Iraq", region: "Asia" || "Western Asia" },
-    { value: "Iran", label: "Iran", region: "Asia" || "Western Asia" },
-    { value: "China", label: "China", region: "Asia" || "Eastern Asia" },
-    { value: "Japan", label: "Japan", region: "Asia" || "Eastern Asia" },
-    { value: "Kuwait", label: "Kuwait", region: "Asia" || "Western Asia" },
-
-    {
-      value: "Nigeria",
-      label: "Nigeria",
-      region: "Africa" || "Western Africa",
-    },
-    { value: "Angola", label: "Angola", region: "Africa" || "Central Africa" },
-    { value: "Egypt", label: "Egypt", region: "Africa" || "Northern Africa" },
-    {
-      value: "South Africa",
-      label: "South Africa",
-      region: "Africa" || "Southern Africa",
-    },
-    {
-      value: "Mali, Niger",
-      label: "Mali, Niger",
-      region: "Africa" || "Western Africa",
-    },
-    { value: "Libya", label: "Libya", region: "Africa" || "Northern Africa" },
-    {
-      value: "Burkina Faso",
-      label: "Burkina Faso",
-      region: "Africa" || "Western Africa",
-    },
-    {
-      value: "South Sudan",
-      label: "South Sudan",
-      region: "Africa" || "Central Africa",
-    },
-    {
-      value: "Morocco",
-      label: "Morocco",
-      region: "Africa" || "Northern Africa",
+      region: "South-Eastern Asia",
     },
 
+    //Africa
+    { value: "Libya", label: "Libya", region: "Northern Africa" },
+    { value: "Egypt", label: "Egypt", region: "Northern Africa" },
+    { value: "Morocco", label: "Morocco", region: "Northern Africa"},
+
+    { value: "Angola", label: "Angola", region: "Central Africa" },
+    { value: "Gabon", label: "Gabon", region: "Central Africa" },
+    { value: "South Sudan", label: "South Sudan", region: "Central Africa"},
+
+    { value: "Mali, Niger", label: "Mali, Niger", region: "Western Africa"},
+
+    { value: "Burkina Faso", label: "Burkina Faso", region: "Western Africa"},
+    { value: "Nigeria", label: "Nigeria", region: "Western Africa"},
+    { value: "South Africa", label: "South Africa", region: "Southern Africa"},
+    
+    //Australia
     { value: "Australia", label: "Australia", region: "Oceania" },
   ];
 
@@ -233,12 +222,9 @@ const SidebarFilter = ({ onFilterChange }) => {
   ];
 
   //if selectedRegion not world then show filter out by regions , if world , show all
-  const availableCountries =
-    selectedRegion && selectedRegion.value !== "World"
-      ? allCountries.filter(
-          (country) => country.region === selectedRegion.value,
-        )
-      : allCountries;
+  const availableCountries = allCountries.filter(
+    (country) => country.region === selectedRegion?.value,
+  );
 
   const handleDateChange = (range) => {
     setDateRange(range);
@@ -262,10 +248,10 @@ const SidebarFilter = ({ onFilterChange }) => {
     setSelectedTopic(choices);
   };
 
-  const makeCheckboxFalse=(pestle)=>{
-    pestle.length>=1 && pestle.forEach(item => item.isChecked=false);
+  const makeCheckboxFalse = (pestle) => {
+    pestle.length >= 1 && pestle.forEach((item) => (item.isChecked = false));
     setSelectedPestle([]);
-  }
+  };
 
   const handleResetFilters = () => {
     setDateRange({ min: 2016, max: 2050 });
@@ -281,16 +267,16 @@ const SidebarFilter = ({ onFilterChange }) => {
   useEffect(() => {
     if (onFilterChange) {
       // Package all the current filter states into one object
-      console.log("Pestle :: ",selectedPestle)
+      console.log("Pestle :: ", selectedPestle);
       const currentFilters = {
         // end_year: dateRange.max,
         region: selectedRegion ? selectedRegion.value : null,
         // react-select multi returns an array of objects, we map it to just the strings
         country: selectedCountry ? selectedCountry.map((c) => c.value) : null,
         // Assuming you add state for these later:
-        sector:selectedSector? selectedSector?.map((s) => s.value):null,
-        topic:selectedTopic? selectedTopic?.map((t) => t.value):null,
-        pestle:selectedPestle? selectedPestle?.map((p)=>p.name):null,
+        sector: selectedSector ? selectedSector?.map((s) => s.value) : null,
+        topic: selectedTopic ? selectedTopic?.map((t) => t.value) : null,
+        pestle: selectedPestle ? selectedPestle?.map((p) => p.name) : null,
       };
       // Send it to the parent
       onFilterChange(currentFilters);
@@ -305,15 +291,15 @@ const SidebarFilter = ({ onFilterChange }) => {
   ]);
 
   return (
-    <div className="bg-red-600 w-64 p-2 overflow-y-scroll">
-      <div className="bg-cyan-300 flex justify-between p-2 z-20">
-        <p>Filters</p>{" "}
+    <div className=" w-64 p-2 overflow-y-auto text-white rounded-lg bg-slate-800">
+      <div className="bg-blue-800 rounded-lg flex justify-between p-2 z-20">
+        <p className="text-slate-200 font-semibold">Filters</p>
         <button
           onClick={() => setShowFilter(!showFilter)}
           className="cursor-pointer"
         >
           <span
-            className={`transition-transform inline-block duration-300 ${showFilter ? "rotate-180" : "rotate-0"}`}
+            className={`transition-transform text-slate-300 inline-block duration-300 ${showFilter ? "rotate-180" : "rotate-0"}`}
           >
             ▼
           </span>
@@ -321,31 +307,33 @@ const SidebarFilter = ({ onFilterChange }) => {
       </div>
       {
         <div
-          className={` transition-all duration-500 ease-in-out overflow-hidden ${showFilter ? "opacity-100" : "max-h-0 opacity-0"}`}
+          className={` transition-all flex flex-col gap-5 duration-500 ease-in-out overflow-hidden ${showFilter ? "opacity-100" : "max-h-0 opacity-0"}`}
         >
           <div className="flex flex-col mt-2">
-            <div className="bg-purple-400">
+            <div className="">
               <DateRangeSlider
                 minYear={2016}
                 maxYear={2050}
                 onChange={handleDateChange}
               />
-              <div className=" text-white">
-                Current Selected Range: {dateRange.min} - {dateRange.max}
-              </div>
+              {/* <div className=" text-white text-sm">
+                Selected Range: {dateRange.min} - {dateRange.max}
+              </div> */}
             </div>
           </div>
-          <div>
-            <label>Region</label>
+          <div className="flex flex-col gap-2 ">
+            <label className="font-semibold">Region</label>
             <Select
+              className="text-black"
               options={regions}
               value={selectedRegion}
               onChange={handleRegionChange}
             />
           </div>
-          <div>
-            <label>Country</label>
+          <div className="flex flex-col gap-2 ">
+            <label className="font-semibold">Country</label>
             <Select
+              className="text-black"
               options={availableCountries}
               value={selectedCountry}
               onChange={handleCountryChange}
@@ -353,9 +341,10 @@ const SidebarFilter = ({ onFilterChange }) => {
               isSearchable
             />
           </div>
-          <div>
-            <label>Sector</label>
+          <div className="flex flex-col gap-2 ">
+            <label className="font-semibold">Sector</label>
             <Select
+              className="text-black"
               options={sectors}
               value={selectedSector}
               onChange={handleSectorChange}
@@ -363,10 +352,10 @@ const SidebarFilter = ({ onFilterChange }) => {
               isSearchable
             />
           </div>
-          <div className="">
-            <label>Topic</label>
+          <div className="flex flex-col gap-2 ">
+            <label className="font-semibold">Topic</label>
             <Select
-              className=""
+              className="text-black"
               options={topics}
               value={selectedTopic}
               onChange={handleTopicChange}
@@ -374,8 +363,8 @@ const SidebarFilter = ({ onFilterChange }) => {
               isSearchable
             />
           </div>
-          <div>
-            <label>Pestle</label>
+          <div className="flex flex-col gap-2 ">
+            <label className="font-semibold">Pestle</label>
             <MultipleCheckBox
               items={pestleList}
               selectedPestle={selectedPestle}
@@ -385,7 +374,7 @@ const SidebarFilter = ({ onFilterChange }) => {
 
           <button
             onClick={handleResetFilters}
-            className="w-full mt-4 bg-slate-700 hover:bg-slate-600 text-white py-2 rounded transition-colors"
+            className="w-full mt-4 bg-blue-700 hover:bg-blue-600 text-white py-2 rounded transition-colors"
           >
             Reset All Filters
           </button>

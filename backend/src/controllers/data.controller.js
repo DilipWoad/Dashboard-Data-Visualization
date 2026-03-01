@@ -8,10 +8,10 @@ const queryFilters = (query) => {
   const { end_year, topic, sector, region, pestle, country } = query;
 
   console.log("--------------------The Query :: ",query)
-  const countryArray = country.split(",");
-  const topicArray = topic.split(",");
-  const sectorArray = sector.split(",");
-  const pestleArray = pestle.split(",");
+  const countryArray = country?.split(",");
+  const topicArray = topic?.split(",");
+  const sectorArray = sector?.split(",");
+  const pestleArray = pestle?.split(",");
 
   if (end_year) filter.end_year = end_year;
 
