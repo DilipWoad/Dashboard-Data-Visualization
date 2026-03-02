@@ -14,7 +14,6 @@ const queryFilters = (query) => {
   const pestleArray = pestle?.split(",");
 
   if (end_year) filter.end_year = end_year;
-
   if (topic) filter.topic = { $in: topicArray};
   if (sector) filter.sector = { $in: sectorArray};
   if (region) filter.region = region

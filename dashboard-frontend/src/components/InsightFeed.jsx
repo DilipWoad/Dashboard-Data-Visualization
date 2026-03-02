@@ -41,8 +41,8 @@ const InsightFeed = ({ feedData }) => {
   //     },
   //   ];
   return (
-    <div className="bg-slate-800 p-2  rounded-lg text-slate-300 font-sans w-full ">
-      <h2 className="text-base font-semibold mb-4 text-slate-50">
+    <div className="bg-slate-800 p-2 rounded-lg text-slate-300 font-sans w-full ">
+      <h2 className="text-base font-semibold  text-slate-50">
         Insight Feed {`(${feedData.length})`}
       </h2>
 
