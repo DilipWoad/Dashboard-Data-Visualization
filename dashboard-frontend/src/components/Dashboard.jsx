@@ -1,6 +1,6 @@
 import TrendLineChart from "./D3Components/TrendLineChart";
 
-const Dashboard = () => {
+const Dashboard = ({data,setDateRange, dateRange}) => {
   return (
     // This is gemini design
     <div className="  font-sans text-slate-300 flex flex-col gap-2">
@@ -16,7 +16,7 @@ const Dashboard = () => {
           <h2 className="text-sm font-semibold mb-2 text-slate-100">
             Trend Over Time
           </h2>
-          <TrendLineChart/>
+          <TrendLineChart data={data} setDateRange={setDateRange} dateRange={dateRange}/>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
-import { useRef, useEffect } from 'react';
-import * as d3 from 'd3';
+import { useRef, useEffect } from "react";
+import * as d3 from "d3";
 
 const mockData = [
   { date: new Date(2016, 0, 1), value: 0.5 },
@@ -14,94 +14,106 @@ const mockData = [
   { date: new Date(2020, 6, 1), value: 4.2 },
 ];
 
-const TrendLineChart = () => {
-  // 1. Create a reference to the SVG element
-  const svgRef = useRef(null);
+const TrendLineChart = ({data,setDateRange, dateRange}) => {
+  const svgRef = useRef();
+  console.log("Trend data :: ",data)
 
   useEffect(() => {
-    // 2. Set up dimensions and margins
-    const margin = { top: 20, right: 20, bottom: 30, left: 20 };
-    const width = 400 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    if (!data || data.length === 0) return;
+    //create a space/canvas for the svg
+    const margins = { top: "20", right: "20", bottom: "30", left: "40" };
+    const width = 400 - margins.right - margins.left;
+    const height = 300 - margins.top - margins.bottom;
 
-    // Clear any previous charts (important for React hot-reloading)
+    //clear any previous render (in order to get fresh and live data)
     d3.select(svgRef.current).selectAll("*").remove();
 
-    // 3. Create the main SVG container and append a group (<g>) shifted by margins
-    const svg = d3.select(svgRef.current)
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
+    //Now we will create new render of charts
+    //1) Make the container for the svg
+    const svg = d3
+      .select(svgRef.current)
+      .attr("width", width + margins.left + margins.right)
+      .attr("height", height + margins.top + margins.bottom)
       .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
+      .attr("transform", `translate(${margins.left},${margins.top})`);
 
-    // 4. SCALES
-    // X Scale (Time): Maps dates to pixel width
-    const xScale = d3.scaleTime()
-      .domain(d3.extent(mockData, d => d.date)) // [minDate, maxDate]
-      .range([0, width]); // [0 pixels, 340 pixels]
+    //SCALE
+    // x-Scale
+    console.log("jbdkbvbvbkvbasdbnvalsknvasklnkls",dateRange)
+    
+    const xScale = d3
+      .scaleTime()
+      .domain([dateRange.min,dateRange.max]) //this finds the min and max value
+      .range([0, width]); //Now this will range of pixel , and based on the min-max it points in in-btw date
 
-    // Y Scale (Linear): Maps values (0 to 5) to pixel height
-    // Note: SVG y=0 is at the TOP, so range is [height, 0] to flip it
-    const yScale = d3.scaleLinear()
-      .domain([0, 5])
-      .range([height, 0]);
+      console.log("X scale : : ",xScale)
+    //y-Scale
+    const maxY = d3.max(data, d => d.intensity) || 10;
+    const yScale = d3
+      .scaleLinear()
+      .domain([0, maxY*1.1]) //min=0 and max=5 0,1,2,3,4,5
+      .range([height, 0]); //so as svg is inverse(upside-down) of normal graph so we start with height length till 0
 
-    // 5. AXES
-    // Create bottom axis and format the ticks to show just the year
-    const xAxis = d3.axisBottom(xScale).ticks(5).tickFormat(d3.timeFormat("%Y"));
-    svg.append("g")
-      .attr("transform", `translate(0,${height})`) // Move it to the bottom
+    //AXES
+    //xAxis
+    const xAxis = d3
+      .axisBottom(xScale)
+      .ticks(5)
+      .tickFormat(d3.timeFormat("%Y"));
+    svg
+      .append("g") // g means grid a grid line only one
+      .attr("transform", `translate(0,${height})`) //from top -> (0,height)
       .call(xAxis)
-      .attr("color", "#64748b"); // Tailwind slate-500
-
-    // Create left axis
-    const yAxis = d3.axisLeft(yScale).ticks(5);
-    svg.append("g")
-      .call(yAxis)
       .attr("color", "#64748b");
 
+    const yAxis = d3.axisLeft(yScale).ticks(10);
+    svg.append("g").call(yAxis).attr("color", "#64748b");
+
     // Add horizontal grid lines (styling the ticks)
-    svg.append("g")
+    svg
+      .append("g")
       .attr("class", "grid")
-      .call(d3.axisLeft(yScale)
-        .tickSize(-width)
-        .tickFormat("")
-      )
-      .attr("color", "#334155") // Tailwind slate-700
+      .call(d3.axisLeft(yScale).tickSize(-width).tickFormat(""))
+      .attr("color", "#334155")
       .attr("stroke-opacity", 0.5);
 
-    // 6. THE LINE GENERATOR
-    // This tells D3 how to extract X and Y coordinates from your data objects
-    const lineGenerator = d3.line()
-      .x(d => xScale(d.date))
-      .y(d => yScale(d.value))
-      .curve(d3.curveMonotoneX); // This makes the line smooth/curvy
+    // svg.append("g")
+    //   .attr("class", "grid")
+    //   .call(d3.axisTop(xScale)
+    //     .tickSize(-height)
+    //     .tickFormat("")
+    //   )
+    //   .attr("color", "#334155") // Tailwind slate-700
+    //   .attr("stroke-opacity", 0.5);
+
+    //Line Generator
+    const lineGenerator = d3
+      .line()
+      .x((d) => xScale(d.end_year))
+      .y((d) => yScale(d.intensity))
+      .curve(d3.curveMonotoneX);
 
     // 7. DRAW THE LINE
-    const path = svg.append("path")
-      .datum(mockData) // Bind the data
+    const path = svg
+      .append("path")
+      .datum(data) // Bind the data
       .attr("fill", "none")
       .attr("stroke", "#3b82f6") // Tailwind blue-500
       .attr("stroke-width", 2.5)
-      .attr("d", lineGenerator); // Feed data through the generator
+      .attr("d", lineGenerator);
 
-    // 8. ANIMATION (The "draw in" effect)
-    // Get the total length of the path in pixels
     const totalLength = path.node().getTotalLength();
 
-    // Set up dash array and dash offset to hide the line initially
     path
       .attr("stroke-dasharray", totalLength + " " + totalLength)
       .attr("stroke-dashoffset", totalLength)
-      .transition() // Start a D3 transition
-      .duration(2000) // 2 seconds
-      .ease(d3.easeLinear) // Smooth, even speed
-      .attr("stroke-dashoffset", 0); // Animate to fully visible
-
-  }, []); // Empty dependency array means this runs once on mount
-
+      .transition()
+      .duration(2000)
+      .ease(d3.easeLinear)
+      .attr("stroke-dashoffset", 0);
+  }, [data]);
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <svg ref={svgRef}></svg>
     </div>
   );

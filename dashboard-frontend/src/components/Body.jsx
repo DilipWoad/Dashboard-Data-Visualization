@@ -6,7 +6,10 @@ import SidebarFilter from "./SidebarFilter";
 import axios from "axios";
 
 const Body = () => {
+    const [dateRange, setDateRange] = useState({ min: "2016", max: "2050" });
+
   const [filterData, setFilterData] = useState(null);
+  const [dashboardData, setDashboardData] = useState(null);
   const [dataMetric, setDataMetric] = useState(null);
   const [insightFeed, setInsightFeed] = useState([]);
 
@@ -21,6 +24,7 @@ const Body = () => {
       const res = await axios.get(`${base_url}?${queryString}`);
       const data = res.data.data;
       getInsightData(data);
+      setDashboardData(data);
       console.log("Data from the Backend :: ", data);
     } catch (error) {
       console.error("Error while fetching data :: ", error);
@@ -73,8 +77,8 @@ const Body = () => {
     <div className="bg-gray-600 h-full p-2 flex flex-col gap-2">
       <HeaderMetrix dataMetric={dataMetric} />
       <div className="flex gap-2 flex-1 overflow-auto">
-        <SidebarFilter onFilterChange={onFilterChange} />
-        <MainBody insightFeed={insightFeed} />
+        <SidebarFilter onFilterChange={onFilterChange} setDateRange={setDateRange} dateRange={dateRange} />
+        <MainBody insightFeed={insightFeed} data={dashboardData} setDateRange={setDateRange} dateRange={dateRange} />
       </div>
     </div>
   );

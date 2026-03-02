@@ -3,8 +3,8 @@ import DateRangeSlider from "../utils/DateRangeSlider";
 import Select from "react-select";
 import MultipleCheckBox from "../utils/MultipleCheckBox";
 
-const SidebarFilter = ({ onFilterChange }) => {
-  const [dateRange, setDateRange] = useState({ min: "2016", max: "2050" });
+const SidebarFilter = ({ onFilterChange,dateRange,setDateRange }) => {
+  // const [dateRange, setDateRange] = useState({ min: "2016", max: "2050" });
   const [showFilter, setShowFilter] = useState(false);
 
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -269,7 +269,8 @@ const SidebarFilter = ({ onFilterChange }) => {
       // Package all the current filter states into one object
       console.log("Pestle :: ", selectedPestle);
       const currentFilters = {
-        // end_year: dateRange.max,
+        end_year: dateRange.max,
+        start_year: dateRange.min,
         region: selectedRegion ? selectedRegion.value : null,
         // react-select multi returns an array of objects, we map it to just the strings
         country: selectedCountry ? selectedCountry.map((c) => c.value) : null,

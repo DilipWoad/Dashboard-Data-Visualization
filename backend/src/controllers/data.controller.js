@@ -5,7 +5,7 @@ import asyncRequestHandler from "../utils/asyncReqestHandler.js";
 const queryFilters = (query) => {
   const filter = {};
 
-  const { end_year, topic, sector, region, pestle, country } = query;
+  const { end_year, topic, sector, region, pestle, country,start_year } = query;
 
   console.log("--------------------The Query :: ",query)
   const countryArray = country?.split(",");
@@ -13,7 +13,8 @@ const queryFilters = (query) => {
   const sectorArray = sector?.split(",");
   const pestleArray = pestle?.split(",");
 
-  if (end_year) filter.end_year = end_year;
+  if (end_year) filter.end_year = {$gte:start_year, $lte:end_year};
+  if (start_year) filter.start_year = {$gte:start_year, $lte:end_year};
   if (topic) filter.topic = { $in: topicArray};
   if (sector) filter.sector = { $in: sectorArray};
   if (region) filter.region = region
