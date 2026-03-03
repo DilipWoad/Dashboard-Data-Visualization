@@ -40,99 +40,91 @@ const SidebarFilter = ({ onFilterChange,dateRange,setDateRange }) => {
   ];
 
   const allCountries = [
-    //America
-    {
-      value: "United States of America",
-      label: "United States of America",
-      region: "Northern America",
-    },
-    { value: "Canada", label: "Canada", region: "Northern America" },
-
-    { value: "Mexico", label: "Mexico", region: "Central America" },
-    { value: "Belize", label: "Belize", region: "Central America" },
-
-    { value: "Brazil", label: "Brazil", region: "South America" },
-    { value: "Colombia", label: "Colombia", region: "South America" },
-    { value: "Argentina", label: "Argentina", region: "South America" },
-    { value: "Venezuela", label: "Venezuela", region: "South America" },
-
-    //Europe
-    {
-      value: "United Kingdom",
-      label: "United Kingdom",
-      region: "Northern Europe",
-    },
-    { value: "Russia", label: "Russia", region: "Eastern Europe" },
-    {
-      value: "Ukraine",
-      label: "Ukraine",
-      region: "Eastern Europe",
-    },
-    {
-      value: "Estonia",
-      label: "Estonia",
-      region: "Eastern Europe",
-    },
-    {
-      value: "Hungary",
-      label: "Hungary",
-      region: "Eastern Europe",
-    },
-    {
-      value: "Germany",
-      label: "Germany",
-      region: "Western Europe",
-    },
-    {
-      value: "Austria",
-      label: "Austria",
-      region: "Western Europe",
-    },
-    { value: "Spain", label: "Spain", region: "Southern Europe" },
-
-    //Asia
-    { value: "China", label: "China", region: "Eastern Asia" },
-    { value: "Japan", label: "Japan", region: "Eastern Asia" },
-    { value: "Iraq", label: "Iraq", region: "Western Asia" },
-    { value: "Iran", label: "Iran", region: "Western Asia" },
-    { value: "Kuwait", label: "Kuwait", region: "Western Asia" },
-    {
-      value: "Saudi Arabia",
-      label: "Saudi Arabia",
-      region: "Western Asia",
-    },
-    {
-      value: "Azerbaijan",
-      label: "Azerbaijan",
-      region: "Western Asia",
-    },
-    { value: "Lebanon", label: "Lebanon", region: "Western Asia" },
-    { value: "India", label: "India", region: "Southern Asia" },
-    {
-      value: "Indonesia",
-      label: "Indonesia",
-      region: "South-Eastern Asia",
-    },
-
-    //Africa
-    { value: "Libya", label: "Libya", region: "Northern Africa" },
-    { value: "Egypt", label: "Egypt", region: "Northern Africa" },
-    { value: "Morocco", label: "Morocco", region: "Northern Africa"},
-
-    { value: "Angola", label: "Angola", region: "Central Africa" },
-    { value: "Gabon", label: "Gabon", region: "Central Africa" },
-    { value: "South Sudan", label: "South Sudan", region: "Central Africa"},
-
-    { value: "Mali, Niger", label: "Mali, Niger", region: "Western Africa"},
-
-    { value: "Burkina Faso", label: "Burkina Faso", region: "Western Africa"},
-    { value: "Nigeria", label: "Nigeria", region: "Western Africa"},
-    { value: "South Africa", label: "South Africa", region: "Southern Africa"},
-    
-    //Australia
-    { value: "Australia", label: "Australia", region: "Oceania" },
-  ];
-
+  { value: "Algeria", label: "Algeria", region: "Northern Africa" },
+  { value: "Angola", label: "Angola", region: "Central Africa" },
+  { value: "Argentina", label: "Argentina", region: "South America" },
+  { value: "Australia", label: "Australia", region: "Oceania" },
+  { value: "Austria", label: "Austria", region: "Western Europe" },
+  { value: "Azerbaijan", label: "Azerbaijan", region: "Central Asia" },
+  { value: "Belize", label: "Belize", region: "Central America" },
+  { value: "Brazil", label: "Brazil", region: "South America" },
+  { value: "Burkina Faso", label: "Burkina Faso", region: "Western Africa" },
+  { value: "Canada", label: "Canada", region: "Northern America" },
+  { value: "China", label: "China", region: "Eastern Asia" },
+  { value: "Colombia", label: "Colombia", region: "South America" },
+  { value: "Cyprus", label: "Cyprus", region: "Western Asia" },
+  { value: "Denmark", label: "Denmark", region: "Northern Europe" },
+  { value: "Egypt", label: "Egypt", region: "Northern Africa" },
+  { value: "Estonia", label: "Estonia", region: "Northern Europe" },
+  { value: "Ethiopia", label: "Ethiopia", region: "Eastern Africa" },
+  { value: "Gabon", label: "Gabon", region: "Central Africa" },
+  { value: "Germany", label: "Germany", region: "Western Europe" },
+  { value: "Ghana", label: "Ghana", region: "Western Africa" },
+  { value: "Greece", label: "Greece", region: "Southern Europe" },
+  { value: "Hungary", label: "Hungary", region: "Eastern Europe" },
+  { value: "India", label: "India", region: "Southern Asia" },
+  {
+    value: "Indonesia",
+    label: "Indonesia",
+    region: "South-Eastern Asia",
+  },
+  { value: "Iran", label: "Iran", region: "Southern Asia" },
+  { value: "Iraq", label: "Iraq", region: "Western Asia" },
+  { value: "Japan", label: "Japan", region: "Eastern Asia" },
+  { value: "Jordan", label: "Jordan", region: "Western Asia" },
+  { value: "Kazakhstan", label: "Kazakhstan", region: "Central Asia" },
+  { value: "Kuwait", label: "Kuwait", region: "Western Asia" },
+  { value: "Lebanon", label: "Lebanon", region: "Western Asia" },
+  { value: "Liberia", label: "Liberia", region: "Western Africa" },
+  { value: "Libya", label: "Libya", region: "Northern Africa" },
+  {
+    value: "Malaysia",
+    label: "Malaysia",
+    region: "South-Eastern Asia",
+  },
+  { value: "Mali", label: "Mali", region: "Western Africa" },
+  { value: "Mexico", label: "Mexico", region: "Central America" },
+  { value: "Morocco", label: "Morocco", region: "Northern Africa" },
+  { value: "Niger", label: "Niger", region: "Western Africa" },
+  { value: "Nigeria", label: "Nigeria", region: "Western Africa" },
+  { value: "Norway", label: "Norway", region: "Northern Europe" },
+  { value: "Oman", label: "Oman", region: "Western Asia" },
+  { value: "Pakistan", label: "Pakistan", region: "Southern Asia" },
+  { value: "Poland", label: "Poland", region: "Eastern Europe" },
+  { value: "Qatar", label: "Qatar", region: "Western Asia" },
+  { value: "Russia", label: "Russia", region: "Eastern Europe" },
+  { value: "Saudi Arabia", label: "Saudi Arabia", region: "Western Asia" },
+  {
+    value: "South Africa",
+    label: "South Africa",
+    region: "Southern Africa",
+  },
+  {
+    value: "South Sudan",
+    label: "South Sudan",
+    region: "Eastern Africa",
+  },
+  { value: "Spain", label: "Spain", region: "Southern Europe" },
+  { value: "Syria", label: "Syria", region: "Western Asia" },
+  { value: "Turkey", label: "Turkey", region: "Western Asia" },
+  { value: "Ukraine", label: "Ukraine", region: "Eastern Europe" },
+  {
+    value: "United Arab Emirates",
+    label: "United Arab Emirates",
+    region: "Western Asia",
+  },
+  {
+    value: "United Kingdom",
+    label: "United Kingdom",
+    region: "Northern Europe",
+  },
+  {
+    value: "United States of America",
+    label: "United States of America",
+    region: "Northern America",
+  },
+  { value: "Venezuela", label: "Venezuela", region: "South America" },
+];
   const sectors = [
     { value: "Energy", label: "Energy" },
     { value: "Environment", label: "Environment" },
