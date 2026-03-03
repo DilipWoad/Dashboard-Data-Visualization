@@ -46,7 +46,7 @@ const InsightFeed = ({ feedData }) => {
         Insight Feed {`(${feedData.length})`}
       </h2>
 
-      <div className="overflow-x-auto w-full h-36">
+      <div className="overflow-x-auto w-full h-48">
         <table className="w-full border-collapse text-left text-sm whitespace-nowrap">
           <thead>
             <tr className="border-b border-slate-700 text-slate-400">
@@ -69,7 +69,7 @@ const InsightFeed = ({ feedData }) => {
                 <td className="p-3  w-5">{row.sector}</td>
                 <td className="p-3">{row.region}</td>
                 <td className="p-3">{row.published}</td>
-                <td className="p-3 bg-red-400   ">
+                <td className="p-3">
                   <ProgressBar value={row.intensity} colorClass="bg-blue-500" max={100} />
                 </td>
                 <td className="p-3">

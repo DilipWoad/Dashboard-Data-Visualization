@@ -13,8 +13,8 @@ const queryFilters = (query) => {
   const sectorArray = sector?.split(",");
   const pestleArray = pestle?.split(",");
 
-  if (end_year) filter.end_year = {$gte:start_year, $lte:end_year};
-  if (start_year) filter.start_year = {$gte:start_year, $lte:end_year};
+  // if (end_year) filter.end_year = {$lte:end_year};
+  // if (start_year) filter.start_year = {$gte:start_year};
   if (topic) filter.topic = { $in: topicArray};
   if (sector) filter.sector = { $in: sectorArray};
   if (region) filter.region = region
@@ -34,7 +34,7 @@ const getDashboardData = asyncRequestHandler(async (req, res) => {
   const filters = queryFilters(req.query);
 
   //now we can find data based on the filters
-  const data = await Data.find(filters).limit(1000);
+  const data = await Data.find(filters);
 
   if (!data || data.length === 0) {
     // Note: We don't throw an error here because an empty filter result
