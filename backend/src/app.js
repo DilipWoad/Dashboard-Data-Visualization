@@ -21,6 +21,13 @@ app.use(express.urlencoded({limit:"20kb",extended:true}));
 //Handling routing 
 import dataRouter from "./routes/data.route.js"
 
+app.get('/',(req,res)=>{
+    res.status(200).send({
+        statusCode : 200,
+        message:"Everthing OK"
+    })
+})
+
 app.use('/api/v1/data',dataRouter)
 //
 
