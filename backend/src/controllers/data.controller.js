@@ -1,5 +1,5 @@
 import { Data } from "../models/data.model.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import asyncRequestHandler from "../utils/asyncReqestHandler.js";
 
 const queryFilters = (query) => {
