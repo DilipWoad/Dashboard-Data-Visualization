@@ -4,7 +4,13 @@ export const app = express();
 
 //configuring backend
 //handle cors
-app.use(cors())
+const currentOrigin = process.env.NODE_ENV==='production' ? process.env.CROSS_ORIGIN : "http://localhost:8080";
+
+const corsOptions = {
+    origin:currentOrigin,
+     credentials: true
+}
+app.use(cors(corsOptions))
 //handle json data
 app.use(express.json({limit:"20kb"}))
 //handle data coming url by decoding it from -> %20%dilip%20%email ect
